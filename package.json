@@ -1,0 +1,43 @@
+{
+  "name": "globular-desktop",
+  "version": "1.0.0",
+  "description": "The official desktop client for globular.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "webpack --mode production && cp -r css dist && cp -r images dist && cp -r audio dist && cp index.html dist && cp config.json dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/globulario/globular-desktop.git"
+  },
+  "keywords": [
+    "globular",
+    "desktop"
+  ],
+  "author": "Dave Courtois",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/globulario/globular-desktop/issues"
+  },
+  "homepage": "https://github.com/globulario/globular-desktop#readme",
+  "devDependencies": {
+    "@types/electron": "^1.6.10",
+    "@types/node": "^18.0.3",
+    "css-loader": "^3.5.3",
+    "electron": "^6.1.12",
+    "file-loader": "^6.0.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "sass": "^1.55.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.2.1",
+    "ts-loader": "^7.0.4",
+    "typescript": "^3.9.2",
+    "typescript-plugin-css-modules": "^2.3.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "dependencies": {
+    "@types/materialize-css": "^1.0.8",
+    "materialize-css": "^1.0.0"
+  }
+}
