@@ -1,24 +1,36 @@
+import { ApplicationView } from "../globular-mvc/ApplicationView";
+import { getTheme } from "../globular-mvc/components/Theme";
 import "./css/main.css";
-import { ConsoleApplication, ConsoleApplicationView } from "./src/application";
+import { DesktopApplication, DesktopApplicationView } from "./src/application";
 //import {hello}
 /**
  * The main entry point of an applicaition.
  */
 function main() {
 
-  let view = new ConsoleApplicationView();
+  let view = new DesktopApplicationView();
 
   // The application.
-  let application = new ConsoleApplication(view);
+  let application = new DesktopApplication(view);
 
   // Connected to the backend.
+  let globular_config_address = ""
+  if (!window.location.origin.startsWith("file://")) {
+    globular_config_address = window.location.origin + "/config"
+  } else if (localStorage.getItem("globular_config_address")) {
+    globular_config_address = localStorage.getItem("globular_config_address")
+  }
+
   application.init(
-    window.location.origin + "/config",
+    globular_config_address,
     () => {
+      /** here the application start correctly */
 
     },
-    (err: any) => {
-      console.log(err);
+    err => {
+      if (err.startsWith("fail to get the configuration file at url")) {
+        application.showConnectInput()
+      }
     }
   );
 }

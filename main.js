@@ -1,13 +1,18 @@
-const {app, BrowserWindow} = require('electron')
-function createMainWindow(){
+const { app, BrowserWindow} = require('electron')
+
+// keep the local file system in the global object.
+function createMainWindow() {
     const mainWindow = new BrowserWindow({
-        title: "Globular Desktop 1.0",
         resizable: true,
-        closable: true
+        closable: true,
+        webPreferences: {
+            nodeIntegration: true
+        }
     })
 
-    // mainWindow.loadURL('https://globule-dell.globular.cloud/console')
+    // Load the entry point...
     mainWindow.loadURL(`file://${__dirname}/dist/index.html`)
+
     // use it at developpement time.
     mainWindow.webContents.openDevTools()
 }

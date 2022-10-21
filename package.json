@@ -1,11 +1,13 @@
 {
-  "name": "globular-desktop",
+  "name": "license",
   "version": "1.0.0",
   "description": "The official desktop client for globular.",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "webpack --mode production && cp -r css dist && cp -r images dist && cp -r audio dist && cp index.html dist && cp config.json dist"
+    "build": "webpack --mode production && cp -r css dist && cp -r images dist && cp -r audio dist && cp index.html dist && cp config.json dist",
+    "pack": "electron-packager . globular-desktop --platform linux --arch x64 --out ../debian/",
+    "deb64": "electron-installer-debian --src ../debian/globular-desktop-linux-x64/ --dest ../debian/installers/ --arch amd64"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,8 @@
     "@types/node": "^18.0.3",
     "css-loader": "^3.5.3",
     "electron": "^6.1.12",
+    "electron-installer-debian": "^3.1.0",
+    "electron-packager": "^16.0.0",
     "file-loader": "^6.0.0",
     "mini-css-extract-plugin": "^0.9.0",
     "sass": "^1.55.0",

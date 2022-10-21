@@ -7,6 +7,7 @@ plugins: [new MiniCssExtractPlugin(), new UglifyJsPlugin()],
 module.exports = {
   mode: "development",
   entry: './index.ts',
+  target: 'electron-renderer',
   devtool: 'eval-cheap-module-source-map',
   plugins: [new MiniCssExtractPlugin()],
   module: {
