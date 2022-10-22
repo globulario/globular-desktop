@@ -24,9 +24,36 @@ const saveArrayAsFile = (arrayBuffer, filePath) => {
   });
 };
 
-// Here I will set the function of File
+File.removeLocal = (path:string, callback:()=>void) => {
+  let userDataPath = (electron.app || electron.remote.app).getPath('userData');
+  userDataPath = userDataPath.split(".")[0]
+  let path_ = userDataPath + "globular" + path
+
+  // remove a file.
+  fs.unlink(path_, callback)
+  
+}
+
+// Test if file has local copy...
+File.hasLocal = (path: string, callback:(exists:boolean)=>void) => {
+  // The file will be save in the node user data directory
+  let userDataPath = (electron.app || electron.remote.app).getPath('userData');
+  userDataPath = userDataPath.split(".")[0]
+  let path_ = userDataPath + "globular" + path
+
+  fs.exists(path_, (exists:boolean)=>{
+    if(exists){
+
+      console.log("file ", path_, " found!")
+    }
+
+    callback(exists)
+  })
+}
+
+// Define file foncion 
 File.saveLocal = (f: File, b: Blob) => {
-  console.log("-----------> blob size is ", b.size)
+
   var fileReader = new FileReader();
   fileReader.onload = function (event) {
     let arrayBuffer = event.target.result;
@@ -34,18 +61,16 @@ File.saveLocal = (f: File, b: Blob) => {
     userDataPath = userDataPath.split(".")[0]
 
     // The file will be save in the node user data directory
-    let path_ = userDataPath + "/globular" + f.path.substring(0, f.path.lastIndexOf("/"))
+    let path_ = userDataPath + "globular" + f.path.substring(0, f.path.lastIndexOf("/"))
 
     // save the file in the user data path
     fs.mkdir(path_, { recursive: true }, (err) => {
       if (err) {
         console.log("There was an error creating the dir")
-      }else{
+      } else {
         saveArrayAsFile(arrayBuffer, path_ + "/" + f.name)
       }
     })
-
-   
   };
   fileReader.readAsArrayBuffer(b);
 }
