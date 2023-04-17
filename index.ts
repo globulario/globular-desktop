@@ -1,5 +1,4 @@
 import { ApplicationView } from "../globular-mvc/ApplicationView";
-import { getTheme } from "../globular-mvc/components/Theme";
 import "./css/main.css";
 import { DesktopApplication, DesktopApplicationView } from "./src/application";
 //import {hello}

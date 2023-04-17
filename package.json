@@ -4,8 +4,8 @@
   "description": "The official desktop client for globular.",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "build": "webpack --mode production && cp -r css dist && cp -r images dist && cp -r audio dist && cp index.html dist && cp config.json dist",
+    "start": "electron --disable-gpu-sandbox .",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider && webpack --mode production && cp -r css dist && cp -r images dist && cp -r audio dist && cp index.html dist && cp config.json dist",
     "pack": "electron-packager . globular-desktop --platform linux --icon=./logo.ico --overwrite --arch x64 --out ../debian/",
     "deb64": "electron-installer-debian --src ../debian/globular-desktop-linux-x64/ --dest ../debian/installers/ --arch amd64"
   },

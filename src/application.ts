@@ -3,7 +3,6 @@ import { Application } from "../../globular-mvc/Application";
 import { ApplicationType, ApplicationView } from "../../globular-mvc/ApplicationView";
 import { Account } from "../../globular-mvc/Account";
 import { SettingsMenu, SettingsPanel } from "../../globular-mvc/components/Settings"
-import { getTheme } from "../../globular-mvc/components/Theme";
 import { Model } from "../../globular-mvc/Model";
 import { File } from "../../globular-mvc/File";
 import { format } from "path";
@@ -134,7 +133,10 @@ export class DesktopApplication extends Application {
     // Here I will ask the user to enter the server address...
     let toast = ApplicationView.displayMessage(`
     <style>
-        ${getTheme()}
+       #select-media-dialog{
+        background-color: var(--palette-primary-accent);
+        color: var(--palette-text-accent);
+       }
     </style>
     <div id="select-media-dialog">
         <div>please enter the address of the server and click the ok button</div>
